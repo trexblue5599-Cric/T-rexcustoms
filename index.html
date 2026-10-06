@@ -165,25 +165,29 @@
             background: rgba(57, 255, 20, 0.18);
         }
 
-        /* ---------- THEME TOGGLE ---------- */
-        #theme-toggle {
-            background: rgba(0, 229, 255, 0.06);
-            border: 1px solid var(--neon-dim);
-            color: var(--neon);
-            font-size: 1.5rem;
-            width: 42px;
-            height: 42px;
-            border-radius: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            padding: 0;
-            line-height: 1;
-            box-shadow: 0 0 10px rgba(0, 229, 255, 0.1);
-            text-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
+        // ---------- THEME TOGGLE ----------
+window.addEventListener('DOMContentLoaded', () => {
+    const themeToggle = document.getElementById('theme-toggle');
+    const savedTheme = localStorage.getItem('voltTheme') || 'cyan';
+
+    if (savedTheme === 'lime') {
+        document.body.classList.add('lime-theme');
+        themeToggle.textContent = '☀';
+    } else {
+        themeToggle.textContent = '◐';
+    }
+
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('lime-theme');
+        if (document.body.classList.contains('lime-theme')) {
+            localStorage.setItem('voltTheme', 'lime');
+            themeToggle.textContent = '☀';
+        } else {
+            localStorage.setItem('voltTheme', 'cyan');
+            themeToggle.textContent = '◐';
         }
+    });
+});
 
         body.lime-theme #theme-toggle {
             background: rgba(57, 255, 20, 0.06);
