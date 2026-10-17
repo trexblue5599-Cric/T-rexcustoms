@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dream Car Customizer — 3D</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/components.css" />
+
+  <!-- three.js via importmap (no bundler needed) -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <main class="configurator" id="app">
+    <header class="configurator__header">
+      <h1>Dream Car <span>Studio</span></h1>
+      <button class="btn btn--ghost" id="resetBtn" type="button">Reset</button>
+    </header>
+
+    <div class="configurator__grid">
+      <!-- LEFT: 3D viewport -->
+      <section class="preview" aria-label="Car preview">
+        <div class="preview__stage" id="carStage">
+          <canvas id="sceneCanvas"></canvas>
+          <div class="preview__loader" id="loader">Loading car…</div>
+        </div>
+        <ul class="preview__specs" id="carSpecs"></ul>
+      </section>
+
+      <!-- RIGHT: controls (unchanged) -->
+      <section class="controls" aria-label="Customization options">
+        <div class="panel">
+          <h2 class="panel__title">Paint</h2>
+          <div class="swatch-grid" id="paintSwatches"></div>
+        </div>
+        <div class="panel">
+          <h2 class="panel__title">Interior</h2>
+          <div class="option-grid" id="wheelOptions"></div>
+        </div>
+        <div class="panel">
+          <h2 class="panel__title">Finish</h2>
+          <div class="option-grid" id="finishOptions"></div>
+        </div>
+        <div class="panel panel--summary">
+          <h2 class="panel__title">Your Build</h2>
+          <dl class="summary" id="summary"></dl>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html> 
