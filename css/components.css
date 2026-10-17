@@ -1,5 +1,6 @@
 /* ============================================================
-   COMPONENTS — reusable UI pieces
+   COMPONENTS — reusable UI pieces (buttons, swatches, panels).
+   Shared by both 2D and 3D modes.
    ============================================================ */
 
 /* ---- Panels ---- */
@@ -8,6 +9,11 @@
   border-radius: var(--radius-md);
   padding: 1.25rem 1.5rem;
   border: 1px solid var(--border);
+}
+
+.panel--summary {
+  /* slightly darker so the "build summary" stands out */
+  background: rgba(10, 14, 23, 0.85);
 }
 
 .panel__title {
@@ -45,9 +51,15 @@
   cursor: pointer;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
   transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  padding: 0;
+  background-clip: padding-box;
 }
 
-.swatch:hover { transform: scale(1.1); border-color: rgba(255,255,255,0.4); }
+.swatch:hover {
+  transform: scale(1.1);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
 .swatch.is-active {
   border-color: #fff;
   box-shadow: 0 0 0 3px rgba(155, 184, 255, 0.35);
@@ -72,9 +84,12 @@
   font-size: 0.85rem;
   cursor: pointer;
   transition: all 0.15s ease;
+  font-family: inherit;
 }
 
-.option:hover { background: rgba(255,255,255,0.08); }
+.option:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
 
 .option.is-active {
   background: rgba(155, 184, 255, 0.18);
@@ -86,7 +101,8 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  flex-shrink: 0;
 }
 
 /* ---- Buttons ---- */
@@ -99,24 +115,26 @@
   border: 1px solid var(--border);
   background: transparent;
   color: var(--text);
+  font-family: inherit;
 }
 
 .btn--ghost:hover {
-  background: rgba(255,255,255,0.08);
-  border-color: rgba(255,255,255,0.25);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
-/* ---- Chips (specs under car) ---- */
+/* ---- Chips (specs under the 3D viewport) ---- */
 .chip {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
   padding: 0.4rem 1rem;
   border-radius: 100px;
-  background: rgba(255,255,255,0.04);
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border);
   font-size: 0.8rem;
   color: #cbd5e1;
+  list-style: none;
 }
 
 .chip i {
@@ -124,22 +142,38 @@
   color: var(--accent);
 }
 
-/* ---- Summary ---- */
+/* ---- Summary list ---- */
+.summary {
+  margin: 0;
+}
+
 .summary__row {
   display: flex;
   justify-content: space-between;
-  padding: 0.4rem 0;
+  padding: 0.5rem 0;
   font-size: 0.9rem;
-  border-bottom: 1px dashed rgba(255,255,255,0.06);
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
 }
-.summary__row:last-child { border-bottom: none; }
-.summary__row dt { color: var(--text-muted); }
-.summary__row dd { color: #fff; font-weight: 500; }
 
-/* ---- Car SVG ---- */
-.car-svg {
-  width: 100%;
-  max-width: 450px;
-  height: auto;
-  filter: drop-shadow(0 20px 20px rgba(0, 0, 0, 0.6));
+.summary__row:last-child {
+  border-bottom: none;
+}
+
+.summary__row dt {
+  color: var(--text-muted);
+}
+
+.summary__row dd {
+  color: #fff;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* ---- Logo (optional, if you add assets/images/ui/logo.svg) ---- */
+.logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  display: inline-block;
+  vertical-align: middle;
 }
