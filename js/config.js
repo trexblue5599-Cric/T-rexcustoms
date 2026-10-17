@@ -1,35 +1,39 @@
 // ============================================================
-//  CONFIG — change anything here to update the whole app.
-//  Colors, wheels, finishes, car shapes, default state.
+//  CONFIG — everything tweakable in one place.
 // ============================================================
 
-const CONFIG = {
-  // -------- Paints --------
+export const CONFIG = {
+  // -------- Model --------
+  modelPath: 'assets/models/car.glb',
+
+  // -------- Paints (applied to body material) --------
   paints: [
-    { id: 'midnight',  name: 'Midnight Blue',  hex: '#1e3a5f' },
-    { id: 'crimson',   name: 'Crimson Red',    hex: '#b91c1c' },
-    { id: 'sunburst',  name: 'Sunburst Yellow',hex: '#f5c518' },
-    { id: 'forest',    name: 'Forest Green',   hex: '#14532d' },
-    { id: 'pearl',     name: 'Pearl White',    hex: '#e5e7eb' },
-    { id: 'graphite',  name: 'Graphite',       hex: '#374151' },
-    { id: 'violet',    name: 'Ultra Violet',   hex: '#6d28d9' },
-    { id: 'orange',    name: 'Lava Orange',    hex: '#ea580c' },
+    { id: 'midnight', name: 'Midnight Blue',  hex: '#1e3a5f', metalness: 0.9, roughness: 0.3 },
+    { id: 'crimson',  name: 'Crimson Red',    hex: '#b91c1c', metalness: 0.9, roughness: 0.25 },
+    { id: 'sunburst', name: 'Sunburst Yellow',hex: '#f5c518', metalness: 0.85, roughness: 0.3 },
+    { id: 'forest',   name: 'Forest Green',   hex: '#14532d', metalness: 0.9, roughness: 0.3 },
+    { id: 'pearl',    name: 'Pearl White',    hex: '#e5e7eb', metalness: 0.6, roughness: 0.2 },
+    { id: 'graphite', name: 'Graphite',       hex: '#374151', metalness: 0.95, roughness: 0.35 },
+    { id: 'violet',   name: 'Ultra Violet',   hex: '#6d28d9', metalness: 0.9, roughness: 0.25 },
+    { id: 'orange',   name: 'Lava Orange',    hex: '#ea580c', metalness: 0.9, roughness: 0.3 },
   ],
 
-  // -------- Wheels --------
+  // -------- Wheels (rim color applied to a named wheel material) --------
+  // NOTE: your .glb must have wheel meshes whose material name
+  // matches `materialName` (e.g. "WheelMaterial"). Adjust per model.
   wheels: [
-    { id: 'sport',   name: 'Sport 5-Spoke', rimColor: '#cbd5e1', spokes: 5 },
-    { id: 'turbine', name: 'Turbine',       rimColor: '#94a3b8', spokes: 12 },
-    { id: 'black',   name: 'Black Alloy',   rimColor: '#1f2937', spokes: 5 },
-    { id: 'gold',    name: 'Gold Edition',  rimColor: '#d4af37', spokes: 6 },
+    { id: 'sport',  name: 'Sport Alloy', rimHex: '#cbd5e1', metalness: 1.0, roughness: 0.2 },
+    { id: 'black',  name: 'Black Alloy', rimHex: '#1f2937', metalness: 1.0, roughness: 0.4 },
+    { id: 'gold',   name: 'Gold Edition',rimHex: '#d4af37', metalness: 1.0, roughness: 0.15 },
+    { id: 'chrome', name: 'Chrome',      rimHex: '#e5e7eb', metalness: 1.0, roughness: 0.05 },
   ],
 
-  // -------- Finishes --------
+  // -------- Finishes (material property presets) --------
   finishes: [
-    { id: 'gloss',   name: 'Gloss',   opacity: 1,    extraFilter: '' },
-    { id: 'metallic',name: 'Metallic',opacity: 0.95, extraFilter: 'brightness(1.15)' },
-    { id: 'matte',   name: 'Matte',   opacity: 0.85, extraFilter: 'saturate(0.7)' },
-    { id: 'chrome',  name: 'Chrome',  opacity: 1,    extraFilter: 'contrast(1.2) brightness(1.3)' },
+    { id: 'gloss',   name: 'Gloss',    roughnessMul: 0.8, clearcoat: 1.0, clearcoatRoughness: 0.05 },
+    { id: 'metallic',name: 'Metallic', roughnessMul: 0.7, clearcoat: 1.0, clearcoatRoughness: 0.1  },
+    { id: 'matte',   name: 'Matte',    roughnessMul: 1.4, clearcoat: 0.0, clearcoatRoughness: 1.0  },
+    { id: 'chrome',  name: 'Chrome',   roughnessMul: 0.2, clearcoat: 1.0, clearcoatRoughness: 0.0  },
   ],
 
   // -------- Default selection --------
@@ -39,16 +43,10 @@ const CONFIG = {
     finish: 'gloss',
   },
 
-  // -------- Car geometry (viewBox + shapes) --------
-  // All coords assume viewBox "0 0 400 200".
-  // Edit path values here to change car silhouette.
-  carGeometry: {
-    viewBox: '0 0 400 200',
-    bodyPath: 'M 60 120 L 80 80 Q 120 55 200 55 Q 280 55 320 80 L 340 120 Q 360 130 350 150 L 320 155 L 80 155 L 50 150 Q 40 130 60 120 Z',
-    windowPath: 'M 110 85 Q 150 65 200 65 Q 250 65 290 85 L 280 110 L 120 110 Z',
-    wheelFront: { cx: 130, cy: 155, r: 22 },
-    wheelRear:  { cx: 290, cy: 155, r: 22 },
-    headlight: { cx: 340, cy: 125, r: 6 },
-    taillight: { cx: 60,  cy: 125, r: 5 },
+  // -------- Camera --------
+  camera: {
+    fov: 40,
+    position: [4.5, 1.8, 5.5],
+    target: [0, 0.6, 0],
   },
 }; 
