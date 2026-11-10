@@ -7,6 +7,7 @@ class Unit {
     this.hp = this.maxHp = this.def.hp;
     this.t = 0; this.walk = 0; this.acting = false;
     this.state = 'toMine'; this.carry = 0;
+    this.off = (Math.random() - 0.5) * 60;   // miners spread out around the gold
   }
   step(dt, gx) {
     this.d = Math.sign(gx - this.x) || this.d;
@@ -28,16 +29,16 @@ class Unit {
     } else this.step(dt, foe.x);
   }
   mine(dt, G) {
-    const home = CFG.playerStatueX + 40, rock = CFG.mineX - 26;
+    const home = CFG.playerStatueX + 40, rock = CFG.mineX + this.off;
     if (this.state === 'toMine') {
       this.step(dt, rock);
-      if (this.x === rock) { this.state = 'dig'; this.t = 0; }
+      if (Math.abs(this.x - rock) < 1) { this.state = 'dig'; this.t = 0; }
     } else if (this.state === 'dig') {
       this.acting = true; this.walk += dt; this.t += dt;
       if (this.t >= CFG.mineTime) { this.carry = CFG.mineGold; this.state = 'toBase'; }
     } else {
       this.step(dt, home);
-      if (this.x === home) { G.gold += this.carry; this.carry = 0; this.state = 'toMine'; }
+      if (Math.abs(this.x - home) < 1) { G.gold += this.carry; this.carry = 0; this.state = 'toMine'; }
     }
   }
 }

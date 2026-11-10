@@ -2,7 +2,7 @@
 const Game = {
   init() {
     Object.assign(this, {
-      gold: CFG.startGold, units: [], fx: [], cool: {}, stance: 'attack',
+      gold: CFG.startGold, units: [], fx: [], nums: [], cool: {}, stance: 'attack',
       over: null, cam: 0, clock: 0, etimer: 3,
       statues: [0, 1].map(team => ({
         team, hp: CFG.statueHP, max: CFG.statueHP,
@@ -31,7 +31,8 @@ const Game = {
   },
   hit(a, b) {
     b.hp -= a.def.dmg;
-    if (a.def.range > 60) this.fx.push({ x1: a.x, x2: b.x, t: 0.15 });
+    if (a.def.range > 60) this.fx.push({ x1: a.x, x2: b.x, t: 0.15, c: a.def.fx });
+    this.nums.push({ x: b.x, y: CFG.groundY - (b.def ? 60 * (b.def.scale || 1) : 130), v: a.def.dmg, t: 0.8 });
   },
   update(dt) {
     if (this.over) return;
@@ -39,13 +40,17 @@ const Game = {
     for (const k in this.cool) this.cool[k] = Math.max(0, this.cool[k] - dt);
     if ((this.etimer -= dt) <= 0) {            // enemy reinforcements
       const m = CFG.enemy.mix;
-      this.spawn(m[Math.floor(Math.random() * m.length)], 1);
+      let t = m[Math.floor(Math.random() * m.length)];
+      if ((t === 'mage' || t === 'giant') && this.clock < 90) t = 'spear';
+      this.spawn(t, 1);
       this.etimer = Math.max(CFG.enemy.minInterval, CFG.enemy.interval - this.clock * CFG.enemy.speedUp);
     }
     for (const u of this.units) u.update(dt, this);
     this.units = this.units.filter(u => u.hp > 0);
     for (const f of this.fx) f.t -= dt;
     this.fx = this.fx.filter(f => f.t > 0);
+    for (const n of this.nums) { n.t -= dt; n.y -= 30 * dt; }
+    this.nums = this.nums.filter(n => n.t > 0);
     if (this.statues[1].hp <= 0) this.over = 'win';
     else if (this.statues[0].hp <= 0) this.over = 'lose';
   }
