@@ -1,0 +1,108 @@
+body {
+  margin: 0;
+  background: #0f172a;
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  overflow: hidden; /* Prevents scrolling */
+}
+
+/* --- Utility Class --- */
+.hidden {
+  display: none !important;
+}
+
+/* ================= MENU SCREEN ================= */
+#menu-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+h1 { margin-bottom: 5px; font-size: 28px; }
+.subtitle { color: #94a3b8; margin-top: 0; margin-bottom: 40px; }
+
+.menu-options {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.menu-btn {
+  padding: 15px;
+  border: 2px solid #475569;
+  border-radius: 8px;
+  background: #1e293b;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.menu-btn small {
+  font-weight: normal;
+  color: #94a3b8;
+}
+
+.menu-btn:hover { background: #334155; border-color: #64748b; }
+.menu-btn.disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ================= GAME SCREEN ================= */
+#game-screen {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+#top-bar {
+  background: #1e293b;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #334155;
+}
+
+#top-bar h3 { margin: 0; font-size: 18px; }
+#stats { font-size: 18px; font-weight: bold; color: #fbbf24; }
+
+#ui, #commands {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px;
+  background: #1e293b;
+}
+
+#commands { background: #0f172a; padding-top: 0; }
+
+button {
+  padding: 10px 15px;
+  border: 0;
+  border-radius: 6px;
+  background: #334155;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+button:active { transform: scale(0.95); }
+.danger-btn { background: #991b1b; }
+
+/* Container for Phaser */
+#game-container {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+}
