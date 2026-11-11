@@ -1,31 +1,83 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kingdoms at War</title>
-  <link rel="stylesheet" href="css/style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kingdoms at War</title>
+
+
+<link rel="stylesheet" href="css/style.css">
+
 </head>
+
 <body>
 
-<h2>⚔️ Kingdoms at War</h2>
-<div id="stats">
-  Gold: <span id="gold">350</span>
+<div id="startScreen">
+
+  <div class="logo">⚔ KINGDOMS AT WAR</div>
+  <div class="subtitle">BUILD YOUR ARMY. RULE THE KINGDOM.</div>
+
+  <div class="battlefield">
+    <div class="fighter one"></div>
+    <div class="fighter two"></div>
+    <div class="fighter three"></div>
+  </div>
+
+  <div class="modes">
+
+    <button class="mode locked" disabled>
+      🏰 CAMPAIGN MODE
+      <small>Coming soon</small>
+    </button>
+
+    <button class="mode active" onclick="startSurvival()">
+      ⚔ SURVIVAL MODE
+      <small>Fight endless waves of enemies</small>
+      <small>▶ TAP TO PLAY</small>
+    </button>
+
+    <button class="mode locked" disabled>
+      ❓ UNKNOWN MODE
+      <small>Coming soon</small>
+    </button>
+
+  </div>
+
 </div>
 
-<div id="ui">
-  <button onclick="recruit('miner')">Miner (75)</button>
-  <button onclick="recruit('sword')">Swordsman (100)</button>
-  <button onclick="recruit('archer')">Archer (150)</button>
-  <button onclick="commandArmy('attack')">Attack</button>
-  <button onclick="commandArmy('defend')">Defend</button>
-  <button onclick="commandArmy('retreat')">Retreat</button>
-</div>
+<div id="gameScreen">
 
-<div id="game"></div>
+  <div class="top">
+    <h1>⚔ Kingdoms at War</h1>
+
+    <div id="gold">Gold: 175</div>
+
+    <button onclick="recruit('miner')">Miner (75)</button>
+    <button onclick="recruit('swordsman')">Swordsman (100)</button>
+    <button onclick="recruit('archer')">Archer (150)</button>
+
+    <br>
+
+    <button onclick="commandArmy('attack')">Attack</button>
+    <button onclick="commandArmy('defend')">Defend</button>
+    <button onclick="commandArmy('retreat')">Retreat</button>
+
+    <br>
+    <button onclick="location.reload()">Main Menu</button>
+  </div>
+
+  <div id="game"></div>
+
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
 <script src="game.js"></script>
+
+<script>
+function startSurvival() {
+  document.getElementById("startScreen").style.display = "none";
+  document.getElementById("gameScreen").classList.add("visible");
+}
+</script>
 
 </body>
 </html>
