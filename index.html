@@ -1,83 +1,58 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kingdoms at War</title>
-
-
-<link rel="stylesheet" href="css/style.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Kingdoms at War</title>
+  
+  <!-- Link to CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<div id="startScreen">
-
-  <div class="logo">⚔ KINGDOMS AT WAR</div>
-  <div class="subtitle">BUILD YOUR ARMY. RULE THE KINGDOM.</div>
-
-  <div class="battlefield">
-    <div class="fighter one"></div>
-    <div class="fighter two"></div>
-    <div class="fighter three"></div>
+  <!-- ================= MENU SCREEN ================= -->
+  <div id="menu-screen">
+    <h1>⚔️ KINGDOMS AT WAR</h1>
+    <p class="subtitle">Build your army. Rule the kingdom.</p>
+    
+    <div class="menu-options">
+      <button class="menu-btn disabled">Campaign Mode <br><small>Coming soon</small></button>
+      <button class="menu-btn" onclick="startGame('survival')">Survival Mode <br><small>Fight endless waves</small></button>
+      <button class="menu-btn disabled">Unknown Mode <br><small>Coming soon</small></button>
+    </div>
   </div>
 
-  <div class="modes">
+  <!-- ================= GAME SCREEN ================= -->
+  <div id="game-screen" class="hidden">
+    <div id="top-bar">
+      <h3>⚔️ Kingdoms at War</h3>
+      <div id="stats">
+        Gold: <span id="gold">350</span>
+      </div>
+    </div>
 
-    <button class="mode locked" disabled>
-      🏰 CAMPAIGN MODE
-      <small>Coming soon</small>
-    </button>
+    <div id="ui">
+      <button onclick="recruit('miner', 75)">Miner (75)</button>
+      <button onclick="recruit('sword', 100)">Swordsman (100)</button>
+      <button onclick="recruit('archer', 150)">Archer (150)</button>
+    </div>
 
-    <button class="mode active" onclick="startSurvival()">
-      ⚔ SURVIVAL MODE
-      <small>Fight endless waves of enemies</small>
-      <small>▶ TAP TO PLAY</small>
-    </button>
+    <div id="commands">
+      <button onclick="commandArmy('attack')">Attack</button>
+      <button onclick="commandArmy('defend')">Defend</button>
+      <button onclick="commandArmy('retreat')">Retreat</button>
+      <button onclick="goToMenu()" class="danger-btn">Main Menu</button>
+    </div>
 
-    <button class="mode locked" disabled>
-      ❓ UNKNOWN MODE
-      <small>Coming soon</small>
-    </button>
-
+    <!-- Phaser Game will be injected here -->
+    <div id="game-container"></div>
   </div>
 
-</div>
-
-<div id="gameScreen">
-
-  <div class="top">
-    <h1>⚔ Kingdoms at War</h1>
-
-    <div id="gold">Gold: 175</div>
-
-    <button onclick="recruit('miner')">Miner (75)</button>
-    <button onclick="recruit('swordsman')">Swordsman (100)</button>
-    <button onclick="recruit('archer')">Archer (150)</button>
-
-    <br>
-
-    <button onclick="commandArmy('attack')">Attack</button>
-    <button onclick="commandArmy('defend')">Defend</button>
-    <button onclick="commandArmy('retreat')">Retreat</button>
-
-    <br>
-    <button onclick="location.reload()">Main Menu</button>
-  </div>
-
-  <div id="game"></div>
-
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
-<script src="game.js"></script>
-
-<script>
-function startSurvival() {
-  document.getElementById("startScreen").style.display = "none";
-  document.getElementById("gameScreen").classList.add("visible");
-}
-</script>
+  <!-- Phaser Engine -->
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
+  
+  <!-- Link to your JS -->
+  <script src="game.js"></script>
 
 </body>
 </html>
